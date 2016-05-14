@@ -27,6 +27,12 @@ var productRank = {
   },
 
   displayImages: function() {
+    var imageLeft = document.getElementById('img1');
+    var imageMid = document.getElementById('img2');
+    var imageRight = document.getElementById('img3');
+    imageLeft.src = allProducts[this.getRandomIndex()].path;
+    imageMid.src = allProducts[this.getRandomIndex()].path;
+    imageRight.src = allProducts[this.getRandomIndex()].path;
     // TODO: Hmm... what's going to happen here?
   },
 
@@ -47,6 +53,6 @@ var productRank = {
   }
 };
 
-productRank.getRandomIndex();
+productRank.displayImages();
 // productRank.imageEls.addEventListener('click', productRank.onClick);
 // productRank.displayImages();
