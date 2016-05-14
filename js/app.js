@@ -14,11 +14,16 @@ for(i in productNames) {
 }
 
 var productRank = {
+  totalClicks: 0,
+  leftObj: null,
+  midObj: null,
+  rightObj: null,
+
   // TODO: All the properties of the object! What do you think you need? Try to write one piece at a time and make sure it does what you want before writing a little more.
   // NOTE: A-C-P reminder... Make very intentional and iterative changes to your code, and then A-C-P.
 
   getRandomIndex: function() {
-    // TODO: Hmm... what's going to happen here?
+    return Math.floor(Math.random() * allProducts.length);
   },
 
   displayImages: function() {
@@ -42,5 +47,6 @@ var productRank = {
   }
 };
 
+productRank.getRandomIndex();
 // productRank.imageEls.addEventListener('click', productRank.onClick);
 // productRank.displayImages();
