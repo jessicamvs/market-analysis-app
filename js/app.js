@@ -1,6 +1,5 @@
 var allProducts = [];
 var productNames = ['bag', 'banana', 'boots', 'chair', 'cthulhu', 'dragon', 'pen', 'scissors', 'shark', 'sweep', 'unicorn', 'usb', 'water_can','wine_glass'];
-// TODO: see the pattern here, and what you need to fill in?
 
 function Product(name, path) {
   this.name = name;
@@ -19,9 +18,6 @@ var productRank = {
   midObj: null,
   rightObj: null,
 
-  // TODO: All the properties of the object! What do you think you need? Try to write one piece at a time and make sure it does what you want before writing a little more.
-  // NOTE: A-C-P reminder... Make very intentional and iterative changes to your code, and then A-C-P.
-
   getRandomIndex: function() {
     return Math.floor(Math.random() * allProducts.length);
   },
@@ -39,7 +35,8 @@ var productRank = {
   },
 
   tallyClicks: function(elementId) {
-    // TODO: Hmm... what's going to happen here?
+    elementId.tally += 1;
+    this.totalClicks += 1;
   },
 
   displayResults: function() {
