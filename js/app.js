@@ -30,10 +30,12 @@ var productRank = {
     var imageLeft = document.getElementById('img1');
     var imageMid = document.getElementById('img2');
     var imageRight = document.getElementById('img3');
-    imageLeft.src = allProducts[this.getRandomIndex()].path;
-    imageMid.src = allProducts[this.getRandomIndex()].path;
-    imageRight.src = allProducts[this.getRandomIndex()].path;
-    // TODO: Hmm... what's going to happen here?
+
+    while (imageLeft.src === imageMid.src || imageLeft.src === imageRight.src || imageMid.src === imageRight.src) {
+      imageLeft.src = allProducts[this.getRandomIndex()].path;
+      imageMid.src = allProducts[this.getRandomIndex()].path;
+      imageRight.src = allProducts[this.getRandomIndex()].path;
+    }
   },
 
   tallyClicks: function(elementId) {
