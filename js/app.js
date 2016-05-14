@@ -14,9 +14,6 @@ for(i in productNames) {
 
 var productRank = {
   totalClicks: 0,
-  leftObj: null,
-  midObj: null,
-  rightObj: null,
 
   getRandomIndex: function() {
     return Math.floor(Math.random() * allProducts.length);
@@ -40,18 +37,18 @@ var productRank = {
   },
 
   displayResults: function() {
-    // TODO: Hmm... what's going to happen here?
+    // make this unhidden then add click event that will make this disappear and display list of results and make reset button vissible
+
   },
 
   showButton: function() {
-    // TODO: Hmm... what's going to happen here?
+    // probably have to write an event here that will remove button once we click it
   },
 
   onClick: function() {
-    // TODO: Hmm... what's going to happen here?
+    // We want to tally the vote and reload images again and once total clicks equals 15 we want to show display results button
   }
 };
 
-productRank.displayImages();
 // productRank.imageEls.addEventListener('click', productRank.onClick);
 // productRank.displayImages();
