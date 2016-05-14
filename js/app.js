@@ -1,11 +1,17 @@
 var allProducts = [];
-var productNames = ['boots', 'chair', 'scissors']; // TODO: see the pattern here, and what you need to fill in?
+var productNames = ['bag', 'banana', 'boots', 'chair', 'cthulhu', 'dragon', 'pen', 'scissors', 'shark', 'sweep', 'unicorn', 'usb', 'water_can','wine_glass'];
+// TODO: see the pattern here, and what you need to fill in?
 
 function Product(name, path) {
-  // TODO: Build your constructor and necessary properties.
+  this.name = name;
+  this.path = path;
+  this.tally = 0;
+  allProducts.push(this);
 }
 
-// TODO: Don't forget to build your objects. How can you do this without having to write 14 lines of `new Product(., ., .)`?
+for(i in productNames) {
+  new Product(productNames[i], 'img/' + productNames[i] + '.jpg');
+}
 
 var productRank = {
   // TODO: All the properties of the object! What do you think you need? Try to write one piece at a time and make sure it does what you want before writing a little more.
@@ -33,7 +39,8 @@ var productRank = {
 
   onClick: function() {
     // TODO: Hmm... what's going to happen here?
-}
+  }
+};
 
-productRank.imageEls.addEventListener('click', productRank.onClick);
-productRank.displayImages();
+// productRank.imageEls.addEventListener('click', productRank.onClick);
+// productRank.displayImages();
