@@ -37,8 +37,25 @@ var productRank = {
   },
 
   displayResults: function() {
-    // make this unhidden then add click event that will make this disappear and display list of results and make reset button vissible
+    var buttonResults = document.getElementById('resultsButton');
+    buttonResults.hidden = false;
 
+    buttonResults.addEventListener('click', function() {
+      buttonResults.hidden = true;
+      var ulEl = document.createElement('ul');
+
+      for(obj in allProducts) {
+        var liElOne = document.createElement('li');
+        liElOne.textContent = allProducts[obj].name + ' received ' + allProducts[obj].tally + ' votes.';
+        ulEl.appendChild(liElOne);
+      }
+
+      var liElTwo = document.createElement('li');
+      liElTwo.textContent = 'Total Votes: ' + productRank.totalClicks;
+      ulEl.appendChild(liElTwo);
+
+      document.getElementById('results').appendChild(ulEl);
+    });
   },
 
   showButton: function() {
@@ -51,4 +68,4 @@ var productRank = {
 };
 
 // productRank.imageEls.addEventListener('click', productRank.onClick);
-// productRank.displayImages();
+productRank.displayImages();
