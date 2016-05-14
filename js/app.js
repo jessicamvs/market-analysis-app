@@ -14,6 +14,7 @@ for(i in productNames) {
 
 var productRank = {
   totalClicks: 0,
+  imageEls: document.getElementById('productDisplay'),
 
   getRandomIndex: function() {
     return Math.floor(Math.random() * allProducts.length);
@@ -32,21 +33,28 @@ var productRank = {
   },
 
   tallyClicks: function(elementId) {
-    elementId.tally += 1;
-    this.totalClicks += 1;
+    for(i in allProducts) {
+      if (elementId === allProducts[i].name) {
+        allProducts[i].tally += 1;
+        this.totalClicks += 1;
+      }
+    }
   },
 
   displayResults: function() {
     var buttonResults = document.getElementById('resultsButton');
     buttonResults.hidden = false;
 
+    var buttonReset = document.getElementById('resetButton');
+
     buttonResults.addEventListener('click', function() {
       buttonResults.hidden = true;
+      buttonReset.hidden = false;
       var ulEl = document.createElement('ul');
 
       for(obj in allProducts) {
         var liElOne = document.createElement('li');
-        liElOne.textContent = allProducts[obj].name + ' received ' + allProducts[obj].tally + ' votes.';
+        liElOne.textContent = allProducts[obj].name.charAt(0).toUpperCase() + allProducts[obj].name.slice(1) + ' received ' + allProducts[obj].tally + ' votes.';
         ulEl.appendChild(liElOne);
       }
 
@@ -58,6 +66,7 @@ var productRank = {
     });
   },
 
+// When you hit 15 clicks show button.
   showButton: function() {
     // probably have to write an event here that will remove button once we click it
   },
