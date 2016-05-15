@@ -21,6 +21,8 @@ var productRank = {
   imageLeft: document.getElementById('img1'),
   imageMid: document.getElementById('img2'),
   imageRight: document.getElementById('img3'),
+  buttonResults: document.getElementById('resultsButton'),
+  buttonReset: document.getElementById('resetButton'),
 
   getRandomIndex: function() {
     return Math.floor(Math.random() * allProducts.length);
@@ -50,6 +52,7 @@ var productRank = {
       if (elementId === allProducts[name].name) {
         allProducts[name].tally += 1;
         this.totalClicks += 1;
+        // this.displayImages();
         console.log(allProducts[name].name + ' has ' + allProducts[name].tally + ' clicks');
         console.log('Total clicks thus far is ' + productRank.totalClicks);
       }
@@ -57,47 +60,42 @@ var productRank = {
   },
 
   displayResults: function() {
-    var buttonResults = document.getElementById('resultsButton');
-    buttonResults.hidden = false;
+    var ulEl = document.createElement('ul');
 
-    var buttonReset = document.getElementById('resetButton');
+    for(obj in allProducts) {
+      var liElOne = document.createElement('li');
+      liElOne.textContent = allProducts[obj].name.charAt(0).toUpperCase() + allProducts[obj].name.slice(1) + ' received ' + allProducts[obj].tally + ' votes.';
+      ulEl.appendChild(liElOne);
+    }
 
-    buttonResults.addEventListener('click', function() {
-      buttonResults.hidden = true;
-      buttonReset.hidden = false;
-      var ulEl = document.createElement('ul');
+    var liElTwo = document.createElement('li');
+    liElTwo.textContent = 'Total Votes: ' + productRank.totalClicks;
+    ulEl.appendChild(liElTwo);
 
-      for(obj in allProducts) {
-        var liElOne = document.createElement('li');
-        liElOne.textContent = allProducts[obj].name.charAt(0).toUpperCase() + allProducts[obj].name.slice(1) + ' received ' + allProducts[obj].tally + ' votes.';
-        ulEl.appendChild(liElOne);
-      }
+    document.getElementById('results').appendChild(ulEl);
+  },
 
-      var liElTwo = document.createElement('li');
-      liElTwo.textContent = 'Total Votes: ' + productRank.totalClicks;
-      ulEl.appendChild(liElTwo);
+  showButton: function() {
+    this.buttonResults.hidden = false;
 
-      document.getElementById('results').appendChild(ulEl);
+    this.buttonResults.addEventListener('click', function() {
+      productRank.buttonResults.hidden = true;
+      productRank.buttonReset.hidden = false;
+      productRank.displayResults();
     });
   },
 
-// When you hit 15 clicks show button.
-  showButton: function() {
-    // probably have to write an event here that will remove button once we click it
-  },
-
   onClick: function() {
-    if(this.totalClicks % 15 === 0) {
-      // this.displayResults();
+    if(productRank.totalClicks === 14) {
+      productRank.tallyClicks(event.target.id);
+      productRank.imageEls.removeEventListener('click', productRank.onClick);
+      productRank.showButton();
+    } else {
+      productRank.tallyClicks(event.target.id);
+      productRank.displayImages();
     }
-    // location.reload
-    // We want to tally the vote and reload images again and once total clicks equals 15 we want to show display results button
   }
 };
-productRank.displayImages();
 
-productRank.imageEls.addEventListener('click', function() {
-  console.log(event.target.id);
-  productRank.tallyClicks(event.target.id);
-});
-// productRank.imageEls.addEventListener('click', productRank.onClick());
+productRank.displayImages();
+productRank.imageEls.addEventListener('click', productRank.onClick);
