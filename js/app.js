@@ -14,29 +14,44 @@ for(i in productNames) {
 
 var productRank = {
   totalClicks: 0,
+  leftObj: null,
+  midObj: null,
+  rightObj: null,
   imageEls: document.getElementById('productDisplay'),
+  imageLeft: document.getElementById('img1'),
+  imageMid: document.getElementById('img2'),
+  imageRight: document.getElementById('img3'),
 
   getRandomIndex: function() {
     return Math.floor(Math.random() * allProducts.length);
   },
 
   displayImages: function() {
-    var imageLeft = document.getElementById('img1');
-    var imageMid = document.getElementById('img2');
-    var imageRight = document.getElementById('img3');
+    this.leftObj = allProducts[this.getRandomIndex()];
+    this.midObj = allProducts[this.getRandomIndex()];
+    this.rightObj = allProducts[this.getRandomIndex()];
 
-    while (imageLeft.src === imageMid.src || imageLeft.src === imageRight.src || imageMid.src === imageRight.src) {
-      imageLeft.src = allProducts[this.getRandomIndex()].path;
-      imageMid.src = allProducts[this.getRandomIndex()].path;
-      imageRight.src = allProducts[this.getRandomIndex()].path;
+    if (this.leftObj === this.midObj || this.leftObj === this.rightObj || this.midObj === this.rightObj) {
+      this.displayImages();
+    } else {
+      this.imageLeft.src = this.leftObj.path;
+      this.imageLeft.id = this.leftObj.name;
+
+      this.imageMid.src = this.midObj.path;
+      this.imageMid.id = this.midObj.name;
+
+      this.imageRight.src = this.rightObj.path;
+      this.imageRight.id = this.rightObj.name;
     }
   },
 
   tallyClicks: function(elementId) {
-    for(i in allProducts) {
-      if (elementId === allProducts[i].name) {
-        allProducts[i].tally += 1;
+    for(name in allProducts) {
+      if (elementId === allProducts[name].name) {
+        allProducts[name].tally += 1;
         this.totalClicks += 1;
+        console.log(allProducts[name].name + ' has ' + allProducts[name].tally + ' clicks');
+        console.log('Total clicks thus far is ' + productRank.totalClicks);
       }
     }
   },
@@ -72,9 +87,17 @@ var productRank = {
   },
 
   onClick: function() {
+    if(this.totalClicks % 15 === 0) {
+      // this.displayResults();
+    }
+    // location.reload
     // We want to tally the vote and reload images again and once total clicks equals 15 we want to show display results button
   }
 };
-
-// productRank.imageEls.addEventListener('click', productRank.onClick);
 productRank.displayImages();
+
+productRank.imageEls.addEventListener('click', function() {
+  console.log(event.target.id);
+  productRank.tallyClicks(event.target.id);
+});
+// productRank.imageEls.addEventListener('click', productRank.onClick());
