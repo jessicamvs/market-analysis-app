@@ -1,0 +1,41 @@
+body {
+  max-width: 960px;
+  margin: 0px auto;
+}
+
+main {
+  background-color: #b9c4b6;
+}
+
+header, p {
+  font-weight: bold;
+  text-align: center;
+}
+
+header {
+  background-color: #485249;
+  color: white;
+  font-size: 32px;
+}
+
+p {
+  font-size: 24px;
+}
+
+#productDisplay {
+  width: 734px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  border: 1px solid black;
+}
+
+ul {
+  height: 300px;
+  columns: 3;
+}
