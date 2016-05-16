@@ -52,7 +52,6 @@ var productRank = {
       if (elementId === allProducts[name].name) {
         allProducts[name].tally += 1;
         this.totalClicks += 1;
-        // this.displayImages();
         console.log(allProducts[name].name + ' has ' + allProducts[name].tally + ' clicks');
         console.log('Total clicks thus far is ' + productRank.totalClicks);
       }
