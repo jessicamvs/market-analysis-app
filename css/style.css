@@ -1,5 +1,10 @@
 body {
   max-width: 960px;
+  margin: 0px auto;
+}
+
+main {
+  background-color: #b9c4b6;
 }
 
 header, p {
@@ -8,6 +13,8 @@ header, p {
 }
 
 header {
+  background-color: #485249;
+  color: white;
   font-size: 32px;
 }
 
