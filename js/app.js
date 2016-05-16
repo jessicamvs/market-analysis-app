@@ -91,13 +91,17 @@ var productRank = {
   },
 
   onClick: function() {
-    if(productRank.totalClicks === 14) {
-      productRank.tallyClicks(event.target.id);
-      productRank.imageEls.removeEventListener('click', productRank.onClick);
-      productRank.showButton();
+    if(event.target.id === productRank.imageLeft.id || event.target.id === productRank.imageMid.id || event.target.id === productRank.imageRight.id) {
+      if((productRank.totalClicks + 1) % 15 === 0) {
+        productRank.tallyClicks(event.target.id);
+        productRank.imageEls.removeEventListener('click', productRank.onClick);
+        productRank.showButton();
+      } else {
+        productRank.tallyClicks(event.target.id);
+        productRank.displayImages();
+      }
     } else {
-      productRank.tallyClicks(event.target.id);
-      productRank.displayImages();
+      alert('Please click an image.');
     }
   }
 };
