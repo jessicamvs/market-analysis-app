@@ -83,6 +83,11 @@ var productRank = {
       productRank.buttonReset.hidden = false;
       productRank.displayResults();
     });
+
+    this.buttonReset.addEventListener('click', function() {
+      productRank.buttonReset.hidden = true;
+      location.reload();
+    });
   },
 
   onClick: function() {
