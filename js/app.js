@@ -59,19 +59,36 @@ var productRank = {
   },
 
   displayResults: function() {
-    var ulEl = document.createElement('ul');
+    var data = {
+      labels: productNames,
+      datasets: [
+        {
+          label: 'My First dataset',
+          backgroundColor: 'rgba(220,0,220,0.5)',
+          data: [65, 59, 80, 81, 56, 55, 40]
+        },
+      ]
+    };
 
-    for(obj in allProducts) {
-      var liElOne = document.createElement('li');
-      liElOne.textContent = allProducts[obj].name.charAt(0).toUpperCase() + allProducts[obj].name.slice(1) + ' received ' + allProducts[obj].tally + ' votes.';
-      ulEl.appendChild(liElOne);
-    }
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: data,
+    });
 
-    var liElTwo = document.createElement('li');
-    liElTwo.textContent = 'Total Votes: ' + productRank.totalClicks;
-    ulEl.appendChild(liElTwo);
-
-    document.getElementById('results').appendChild(ulEl);
+    // var ulEl = document.createElement('ul');
+    //
+    // for(obj in allProducts) {
+    //   var liElOne = document.createElement('li');
+    //   liElOne.textContent = allProducts[obj].name.charAt(0).toUpperCase() + allProducts[obj].name.slice(1) + ' received ' + allProducts[obj].tally + ' votes.';
+    //   ulEl.appendChild(liElOne);
+    // }
+    //
+    // var liElTwo = document.createElement('li');
+    // liElTwo.textContent = 'Total Votes: ' + productRank.totalClicks;
+    // ulEl.appendChild(liElTwo);
+    //
+    // document.getElementById('results').appendChild(ulEl);
   },
 
   showButton: function() {
@@ -100,7 +117,7 @@ var productRank = {
         productRank.displayImages();
       }
     } else {
-      alert('Please click an image.');
+      alert('That\'s not an image.');
     }
   }
 };
