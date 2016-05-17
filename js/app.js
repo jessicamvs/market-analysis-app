@@ -6,10 +6,7 @@ function Product(name, path) {
   this.path = path;
   this.tally = 0;
   allProducts.push(this);
-}
-
-for(i in productNames) {
-  new Product(productNames[i], 'img/' + productNames[i] + '.jpg');
+  productRank.data.datasets[0].data.push(this.tally);
 }
 
 var productRank = {
@@ -23,6 +20,16 @@ var productRank = {
   imageRight: document.getElementById('img3'),
   buttonResults: document.getElementById('resultsButton'),
   buttonReset: document.getElementById('resetButton'),
+  data: {
+    labels: productNames,
+    datasets: [
+      {
+        label: 'Votes',
+        backgroundColor: '#d5f4f0',
+        data: []
+      }
+    ]
+  },
 
   getRandomIndex: function() {
     return Math.floor(Math.random() * allProducts.length);
@@ -51,6 +58,7 @@ var productRank = {
     for(name in allProducts) {
       if (elementId === allProducts[name].name) {
         allProducts[name].tally += 1;
+        this.data.datasets[0].data[name] = allProducts[name].tally;
         this.totalClicks += 1;
         console.log(allProducts[name].name + ' has ' + allProducts[name].tally + ' clicks');
         console.log('Total clicks thus far is ' + productRank.totalClicks);
@@ -59,36 +67,11 @@ var productRank = {
   },
 
   displayResults: function() {
-    var data = {
-      labels: productNames,
-      datasets: [
-        {
-          label: 'My First dataset',
-          backgroundColor: 'rgba(220,0,220,0.5)',
-          data: [65, 59, 80, 81, 56, 55, 40]
-        },
-      ]
-    };
-
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
       type: 'bar',
-      data: data,
+      data: this.data,
     });
-
-    // var ulEl = document.createElement('ul');
-    //
-    // for(obj in allProducts) {
-    //   var liElOne = document.createElement('li');
-    //   liElOne.textContent = allProducts[obj].name.charAt(0).toUpperCase() + allProducts[obj].name.slice(1) + ' received ' + allProducts[obj].tally + ' votes.';
-    //   ulEl.appendChild(liElOne);
-    // }
-    //
-    // var liElTwo = document.createElement('li');
-    // liElTwo.textContent = 'Total Votes: ' + productRank.totalClicks;
-    // ulEl.appendChild(liElTwo);
-    //
-    // document.getElementById('results').appendChild(ulEl);
   },
 
   showButton: function() {
@@ -121,6 +104,10 @@ var productRank = {
     }
   }
 };
+
+for(i in productNames) {
+  new Product(productNames[i], 'img/' + productNames[i] + '.jpg');
+}
 
 productRank.displayImages();
 productRank.imageEls.addEventListener('click', productRank.onClick);
