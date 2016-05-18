@@ -1,5 +1,6 @@
 var allProducts = [];
 var productNames = ['bag', 'banana', 'boots', 'chair', 'cthulhu', 'dragon', 'pen', 'scissors', 'shark', 'sweep', 'unicorn', 'usb', 'water_can','wine_glass'];
+var jsonVotes;
 
 function Product(name, path) {
   this.name = name;
@@ -59,6 +60,10 @@ var productRank = {
       if (elementId === allProducts[name].name) {
         allProducts[name].tally += 1;
         this.data.datasets[0].data[name] = allProducts[name].tally;
+        jsonVotes = JSON.stringify(this.data.datasets[0].data);
+        localStorage.setItem('storedVotes', jsonVotes);
+        console.log(jsonVotes);
+
         this.totalClicks += 1;
         console.log(allProducts[name].name + ' has ' + allProducts[name].tally + ' clicks');
         console.log('Total clicks thus far is ' + productRank.totalClicks);
@@ -108,6 +113,13 @@ var productRank = {
 for(i in productNames) {
   new Product(productNames[i], 'img/' + productNames[i] + '.jpg');
 }
+
+if (localStorage.storedVotes) {
+  productRank.data.datasets[0].data = JSON.parse(localStorage.getItem('storedVotes'));
+  for(j in allProducts) {
+    allProducts[j].tally = productRank.data.datasets[0].data[j];
+  }
+};
 
 productRank.displayImages();
 productRank.imageEls.addEventListener('click', productRank.onClick);

@@ -8,3 +8,9 @@ This app displays 3 unique products to the user and asks them to choose the prod
 + Used if...else... statement to ensure images are unique.
 + Used if statement inside of a for loop to check that user clicked on an image and not outside.
 + Used an event listener to handle votes for each image and totalClicks.
+
+### N14 -
++ Added a bar chart using chart.js.
+
+### N15 -
++ Added local storage functionality using JSON.stringify(), localStorage.setItem(), JSON.parse(), and localStorage.getItem().
